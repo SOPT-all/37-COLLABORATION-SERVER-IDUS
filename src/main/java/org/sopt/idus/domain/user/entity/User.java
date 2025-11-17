@@ -1,4 +1,4 @@
-package org.sopt.idus.domain.user;
+package org.sopt.idus.domain.user.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,7 +1,7 @@
 package org.sopt.idus.domain.review.dto;
 
 import org.sopt.idus.domain.review.entity.Review;
-import org.sopt.idus.domain.user.User;
+import org.sopt.idus.domain.user.entity.User;
 
 import java.time.LocalDateTime;
 

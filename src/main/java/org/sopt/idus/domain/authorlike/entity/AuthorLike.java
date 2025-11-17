@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sopt.idus.domain.author.entity.Author;
-import org.sopt.idus.domain.user.User;
+import org.sopt.idus.domain.user.entity.User;
 
 @Entity
 @Getter
