@@ -11,6 +11,15 @@ import org.sopt.idus.domain.user.User;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(
+        name = "author_like",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uq_author_like_user_author",
+                        columnNames = {"user_id", "author_id"}
+                )
+        }
+)
 public class AuthorLike {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
