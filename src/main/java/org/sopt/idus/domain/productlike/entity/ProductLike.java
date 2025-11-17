@@ -34,8 +34,12 @@ public class ProductLike {
     private User user;
 
     @Builder
-    public ProductLike(Product product, User user) {
+    private ProductLike(Product product, User user) {
         this.product = product;
         this.user = user;
+    }
+
+    public static ProductLike create(Product product, User user) {
+        return new ProductLike(product, user);
     }
 }
