@@ -2,6 +2,7 @@ package org.sopt.idus.domain.review.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sopt.idus.domain.product.entity.Product;
@@ -39,4 +40,13 @@ public class Review {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @Builder
+    public Review(Integer score, String content, Product product, User user) {
+        this.score = score;
+        this.content = content;
+        this.product = product;
+        this.user = user;
+        this.createdAt = LocalDateTime.now();
+    }
 }
