@@ -1,9 +1,10 @@
-package org.sopt.idus.domain.product.dto;
+package org.sopt.idus.domain.product.dto.response;
 
-import org.sopt.idus.domain.author.entity.Author;
 import org.sopt.idus.domain.product.entity.Product;
+import org.sopt.idus.domain.productimage.entity.ProductImage;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public record ProductResponse(
         Long id,
@@ -13,9 +14,10 @@ public record ProductResponse(
         Integer salesCount,
         Integer reviewCount,
         Integer likeCount,
-        Author author
+        String authorName,
+        List<String> imageUrls
 ) {
-    public static ProductResponse from(Product product) {
+    public static ProductResponse from(Product product, List<ProductImage> productImageList) {
         return new ProductResponse(
                 product.getId(),
                 product.getName(),
@@ -24,7 +26,8 @@ public record ProductResponse(
                 product.getSalesCount(),
                 product.getReviewCount(),
                 product.getLikeCount(),
-                product.getAuthor()
+                product.getAuthor().getName(),
+                productImageList.stream().map(ProductImage::getImageUrl).toList()
         );
     }
 }
