@@ -5,7 +5,7 @@ spring:
     group:
       local: local-db, local-port, common
       dev : dev-db, dev-port, common
-    active: local
+    active: ${ACTIVE_PROFILE}
 
 ---
 spring:
