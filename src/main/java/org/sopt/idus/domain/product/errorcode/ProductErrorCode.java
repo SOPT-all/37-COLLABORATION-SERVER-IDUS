@@ -11,15 +11,15 @@ public enum ProductErrorCode implements ErrorCode {
 
 
     private final int httpStatus;
-
     private final String message;
+
     @Override
     public int getHttpStatus() {
-        return 0;
+        return httpStatus;
     }
 
     @Override
     public String getMessage() {
-        return "";
+        return message;
     }
 }
