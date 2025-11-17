@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import org.sopt.idus.domain.product.entity.Product;
 import org.sopt.idus.domain.user.entity.User;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -31,7 +31,7 @@ public class Review {
 
     private String content;
 
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
@@ -47,6 +47,5 @@ public class Review {
         this.content = content;
         this.product = product;
         this.user = user;
-        this.createdAt = LocalDateTime.now();
     }
 }

@@ -7,9 +7,14 @@ import org.sopt.idus.global.exception.errorcode.GlobalErrorCode;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import static org.sopt.idus.domain.product.errorcode.ProductErrorCode.PRODUCT_NOT_FOUND;
+
 @Getter
 public enum SwaggerResponseDescription {
     COMMON(new LinkedHashSet<>(Set.of(
+    ))),
+    PRODUCT_DETAIL(new LinkedHashSet<>(Set.of(
+            PRODUCT_NOT_FOUND
     )))
 
     ;

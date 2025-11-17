@@ -3,13 +3,13 @@ package org.sopt.idus.domain.review.dto;
 import org.sopt.idus.domain.review.entity.Review;
 import org.sopt.idus.domain.user.entity.User;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public record ReviewResponse(
         Long reviewId,
         Integer score,
         String content,
-        LocalDateTime createdAt,
+        LocalDate createdAt,
         Reviewer reviewer
 ) {
     public static ReviewResponse from(Review review) {

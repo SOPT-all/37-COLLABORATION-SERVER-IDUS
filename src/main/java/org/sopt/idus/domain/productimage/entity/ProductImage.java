@@ -16,16 +16,13 @@ public class ProductImage {
 
     private String imageUrl;
 
-    private String fileName;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     @Builder
-    public ProductImage(String imageUrl, String fileName, Product product) {
+    public ProductImage(String imageUrl, Product product) {
         this.imageUrl = imageUrl;
-        this.fileName = fileName;
         this.product = product;
     }
 }
