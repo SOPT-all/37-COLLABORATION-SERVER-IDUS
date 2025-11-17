@@ -30,6 +30,6 @@ public class Author {
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
-        this.likeCount = (likeCount != null) ? 0 : likeCount;
+        this.likeCount = (likeCount == null) ? 0 : likeCount;
     }
 }
