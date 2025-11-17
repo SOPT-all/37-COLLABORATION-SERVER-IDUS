@@ -48,21 +48,33 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           port: ${{ secrets.EC2_PORT }}
           script: |
-            echo "✋🏻Stopping existing container"
-            sudo docker stop ${{ secrets.CONTAINER_NAME }} || true
-            sudo docker rm ${{ secrets.CONTAINER_NAME }} || true
             ENV_FILE='/etc/idus-server/.env'
+            IMAGE="${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }}"
+            CONTAINER_NAME="${{ secrets.CONTAINER_NAME }}"
+
+            echo "===== SERVER INFO ====="
+            hostname
+            echo "IMAGE: [$IMAGE]"
+            echo "CONTAINER: [$CONTAINER_NAME]"
+            echo "ENV_FILE: [$ENV_FILE]"
+            echo "======================="
+
+            echo "✋🏻Stopping existing container"
+            sudo docker stop "$CONTAINER_NAME" || true
+            sudo docker rm "$CONTAINER_NAME" || true
 
             echo "🥳 Pulling new image"
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }}
+            sudo docker pull "$IMAGE"
 
             echo "🌱 Running new container"
-             sudo docker run -d \
+            sudo docker run -d \
               -p 8080:8080 \
-              --name ${{ secrets.CONTAINER_NAME }} \
+              --name "$CONTAINER_NAME" \
               --env-file "$ENV_FILE" \
-              ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }}
+              "$IMAGE"
 
+            echo "🧾 Current containers"
+            sudo docker ps -a
 
             echo "🚮 Cleaning up old images"
             sudo docker image prune -f
