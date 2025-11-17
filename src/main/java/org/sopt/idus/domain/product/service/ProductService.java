@@ -12,7 +12,6 @@ import org.sopt.idus.domain.productlike.repository.ProductLikeRepository;
 import org.sopt.idus.domain.review.entity.Review;
 import org.sopt.idus.domain.review.repository.ReviewRepository;
 import org.sopt.idus.domain.user.entity.User;
-import org.sopt.idus.domain.user.repository.UserRepository;
 import org.sopt.idus.domain.user.service.UserService;
 import org.sopt.idus.global.exception.customexception.CustomException;
 import org.springframework.stereotype.Service;
@@ -32,8 +31,6 @@ public class ProductService {
     private final ProductImageRepository productImageRepository;
 
     private final ReviewRepository reviewRepository;
-
-    private final UserRepository userRepository;
 
     private final UserService userService;
 
@@ -63,11 +60,23 @@ public class ProductService {
         Product product = findById(productId);
         User user = userService.findById(userId);
 
+        if (deleteLikeIfPresent(productId, userId, product)) return;
+
         ProductLike productLike = ProductLike.create(product, user);
         productLikeRepository.save(productLike);
 
         productRepository.increaseLikeCount(product);
 
     }
+
+    private boolean deleteLikeIfPresent(Long productId, Long userId, Product product) {
+        if(productLikeRepository.existsByProductIdAndUserId(productId, userId)){
+            productLikeRepository.deleteByProductIdAndUserId(productId, userId);
+            productRepository.decreaseLikeCount(product);
+            return true;
+        }
+        return false;
+    }
+
 
 }

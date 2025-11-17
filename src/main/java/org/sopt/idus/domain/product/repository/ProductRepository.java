@@ -11,4 +11,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("update Product p set p.likeCount = p.likeCount + 1 where p = :product")
     void increaseLikeCount(Product product);
 
+    @Modifying
+    @Query("update Product p set p.likeCount = p.likeCount - 1 where p = :product")
+    void decreaseLikeCount(Product product);
+
 }
