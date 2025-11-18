@@ -8,12 +8,20 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static org.sopt.idus.domain.product.errorcode.ProductErrorCode.PRODUCT_NOT_FOUND;
+import static org.sopt.idus.domain.user.errorcode.UserErrorCode.USER_NOT_FOUND;
 
 @Getter
 public enum SwaggerResponseDescription {
     COMMON(new LinkedHashSet<>(Set.of(
     ))),
     PRODUCT_DETAIL(new LinkedHashSet<>(Set.of(
+            PRODUCT_NOT_FOUND
+    ))),
+    CREATE_PRODUCT_LIKE(new LinkedHashSet<>(Set.of(
+            PRODUCT_NOT_FOUND,
+            USER_NOT_FOUND
+    ))),
+    GET_REVIEWS(new LinkedHashSet<>(Set.of(
             PRODUCT_NOT_FOUND
     )))
 
