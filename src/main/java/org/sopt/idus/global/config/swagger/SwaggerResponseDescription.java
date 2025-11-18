@@ -20,6 +20,9 @@ public enum SwaggerResponseDescription {
     CREATE_PRODUCT_LIKE(new LinkedHashSet<>(Set.of(
             PRODUCT_NOT_FOUND,
             USER_NOT_FOUND
+    ))),
+    GET_REVIEWS(new LinkedHashSet<>(Set.of(
+            PRODUCT_NOT_FOUND
     )))
 
     ;

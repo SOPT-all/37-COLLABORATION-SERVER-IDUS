@@ -13,21 +13,12 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(
-        name = "review",
-        uniqueConstraints = {
-                @UniqueConstraint(
-                        name = "uq_review_user_product",
-                        columnNames = {"user_id", "product_id"}
-                )
-        }
-)
 public class Review {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer score;
+    private double score;
 
     private String content;
 
@@ -42,7 +33,7 @@ public class Review {
     private User user;
 
     @Builder
-    public Review(Integer score, String content, Product product, User user) {
+    public Review(double score, String content, Product product, User user) {
         this.score = score;
         this.content = content;
         this.product = product;

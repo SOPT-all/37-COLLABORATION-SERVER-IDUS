@@ -5,12 +5,12 @@ import lombok.RequiredArgsConstructor;
 import org.sopt.idus.domain.product.dto.response.ProductResponse;
 import org.sopt.idus.domain.product.service.ProductService;
 import org.sopt.idus.domain.productlike.dto.ProductLikeRequest;
+import org.sopt.idus.domain.review.dto.response.ReviewListResponse;
 import org.sopt.idus.global.annotation.CustomExceptionDescription;
 import org.sopt.idus.global.dto.response.BaseResponse;
 import org.springframework.web.bind.annotation.*;
 
-import static org.sopt.idus.global.config.swagger.SwaggerResponseDescription.CREATE_PRODUCT_LIKE;
-import static org.sopt.idus.global.config.swagger.SwaggerResponseDescription.PRODUCT_DETAIL;
+import static org.sopt.idus.global.config.swagger.SwaggerResponseDescription.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,6 +34,12 @@ public class ProductController {
         return BaseResponse.ok("작품 좋아요 생성 성공");
     }
 
+    @CustomExceptionDescription(GET_REVIEWS)
+    @Operation(summary = "작품 후기 조회", description = "작품의 후기들을 조회합니다.")
+    @GetMapping("{productId}/reviews")
+    public BaseResponse<ReviewListResponse> getReviews(@PathVariable Long productId){
+        return BaseResponse.ok(productService.getReviews(productId),"작품 후기 조회 성공");
+    }
 
 
 }
