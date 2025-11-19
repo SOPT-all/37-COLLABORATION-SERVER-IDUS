@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class AuthorService {
+
     private final AuthorRepository authorRepository;
 
     public AuthorResponse getAuthorDetail(Long authorId) {
