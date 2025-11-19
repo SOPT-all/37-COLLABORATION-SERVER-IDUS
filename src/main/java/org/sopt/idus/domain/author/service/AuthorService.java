@@ -52,6 +52,4 @@ public class AuthorService {
         return authorRepository.findById(authorId)
                 .orElseThrow(() -> new CustomException(AuthorErrorCode.AUTHOR_NOT_FOUND));
     }
-
-
 }
