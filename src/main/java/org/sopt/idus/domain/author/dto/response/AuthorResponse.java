@@ -1,4 +1,4 @@
-package org.sopt.idus.domain.author.dto;
+package org.sopt.idus.domain.author.dto.response;
 
 import org.sopt.idus.domain.author.entity.Author;
 
