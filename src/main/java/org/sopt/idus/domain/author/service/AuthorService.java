@@ -22,10 +22,12 @@ public class AuthorService {
     private final AuthorLikeRepository authorLikeRepository;
     private final UserService userService;
 
-    public AuthorResponse getAuthorDetail(Long authorId) {
+    public AuthorResponse getAuthorDetail(Long authorId, Long userId) {
         Author author = findById(authorId);
 
-        return AuthorResponse.from(author);
+        boolean isLiked = authorLikeRepository.existsByAuthorIdAndUserId(authorId, userId);
+
+        return AuthorResponse.from(author, isLiked);
     }
 
     @Transactional

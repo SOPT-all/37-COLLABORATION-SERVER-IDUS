@@ -17,15 +17,19 @@ public record AuthorResponse(
         String imageUrl,
 
         @Schema(description = "작가 좋아요 수", example = "9999")
-        Integer likeCount
+        Integer likeCount,
+
+        @Schema(description = "좋아요 여부", example = "true")
+        boolean isLiked
 ) {
-    public static AuthorResponse from(Author author) {
+    public static AuthorResponse from(Author author, boolean isLiked) {
         return new AuthorResponse(
                 author.getId(),
                 author.getName(),
                 author.getDescription(),
                 author.getImageUrl(),
-                author.getLikeCount()
+                author.getLikeCount(),
+                isLiked
         );
     }
 }
