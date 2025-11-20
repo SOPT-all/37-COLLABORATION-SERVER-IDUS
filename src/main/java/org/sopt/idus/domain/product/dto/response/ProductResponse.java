@@ -29,6 +29,9 @@ public record ProductResponse(
         @Schema(description = "작품 좋아요 수", example = "9999")
         Integer likeCount,
 
+        @Schema(description = "좋아요 여부", example = "true")
+        boolean isLiked,
+
         @Schema(description = "작가명")
         String authorName,
 
@@ -38,7 +41,7 @@ public record ProductResponse(
         @Schema(description = "평균 별점", example = "4.8")
         double averageScore
 ) {
-    public static ProductResponse from(Product product, List<ProductImage> productImageList, double averageScore) {
+    public static ProductResponse from(Product product, List<ProductImage> productImageList, double averageScore, boolean isLiked) {
         return new ProductResponse(
                 product.getId(),
                 product.getName(),
@@ -47,6 +50,7 @@ public record ProductResponse(
                 product.getSalesCount(),
                 product.getReviewCount(),
                 product.getLikeCount(),
+                isLiked,
                 product.getAuthor().getName(),
                 productImageList.stream().map(ProductImage::getImageUrl).toList(),
                 averageScore

@@ -22,8 +22,8 @@ public class ProductController {
     @CustomExceptionDescription(PRODUCT_DETAIL)
     @Operation(summary = "작품 정보 조회", description = "작품의 정보를 조회합니다.")
     @GetMapping("{productId}")
-    public BaseResponse<ProductResponse> getProductDetail(@PathVariable Long productId){
-        return BaseResponse.ok(productService.getProductDetail(productId),"작품 조회 성공");
+    public BaseResponse<ProductResponse> getProductDetail(@PathVariable Long productId, @RequestParam Long userId){
+        return BaseResponse.ok(productService.getProductDetail(productId, userId),"작품 조회 성공");
     }
 
     @CustomExceptionDescription(CREATE_PRODUCT_LIKE)
