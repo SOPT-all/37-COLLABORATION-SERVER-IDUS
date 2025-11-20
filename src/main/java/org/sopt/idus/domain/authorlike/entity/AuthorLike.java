@@ -2,10 +2,10 @@ package org.sopt.idus.domain.authorlike.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sopt.idus.domain.author.entity.Author;
+import org.sopt.idus.domain.product.entity.Product;
 import org.sopt.idus.domain.user.entity.User;
 
 @Entity
@@ -33,9 +33,12 @@ public class AuthorLike {
     @JoinColumn(name = "user_id", nullable = false)
     User user;
 
-    @Builder
-    public AuthorLike(Author author, User user) {
+    private AuthorLike(Author author, User user) {
         this.author = author;
         this.user = user;
+    }
+
+    public static AuthorLike create(Author author, User user) {
+        return new AuthorLike(author, user);
     }
 }

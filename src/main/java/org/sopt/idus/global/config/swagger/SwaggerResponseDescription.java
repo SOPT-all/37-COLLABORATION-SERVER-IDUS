@@ -7,6 +7,7 @@ import org.sopt.idus.global.exception.errorcode.GlobalErrorCode;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import static org.sopt.idus.domain.author.errorcode.AuthorErrorCode.AUTHOR_NOT_FOUND;
 import static org.sopt.idus.domain.product.errorcode.ProductErrorCode.PRODUCT_NOT_FOUND;
 import static org.sopt.idus.domain.user.errorcode.UserErrorCode.USER_NOT_FOUND;
 
@@ -23,6 +24,12 @@ public enum SwaggerResponseDescription {
     ))),
     GET_REVIEWS(new LinkedHashSet<>(Set.of(
             PRODUCT_NOT_FOUND
+    ))),
+    AUTHOR_DETAIL(new LinkedHashSet<>(Set.of(
+    ))),
+    CREATE_AUTHOR_LIKE(new LinkedHashSet<>(Set.of(
+            AUTHOR_NOT_FOUND,
+            USER_NOT_FOUND
     )))
 
     ;
