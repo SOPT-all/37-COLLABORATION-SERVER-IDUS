@@ -12,6 +12,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     private static final String frondEndOrigin = "https://37-collaboration-web-idus-main.vercel.app";
 
+    private static final String backEndOrigin = "https://idus-server.p-e.kr";
+
     private static final String localAddress = "localhost";
 
     private static final String frontEndPort = "5173";
@@ -26,6 +28,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                 .allowedOrigins(frondEndOrigin,
-                        httpPrefix + localAddress + ":" + frontEndPort);
+                        httpPrefix + localAddress + ":" + frontEndPort,
+                        backEndOrigin);
     }
 }
