@@ -10,6 +10,7 @@ import io.swagger.v3.oas.models.media.Content;
 import io.swagger.v3.oas.models.media.MediaType;
 import io.swagger.v3.oas.models.responses.ApiResponse;
 import io.swagger.v3.oas.models.responses.ApiResponses;
+import io.swagger.v3.oas.models.servers.Server;
 import org.sopt.idus.global.annotation.CustomExceptionDescription;
 import org.sopt.idus.global.dto.response.BaseErrorResponse;
 import org.sopt.idus.global.exception.errorcode.ErrorCode;
@@ -38,6 +39,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI openAPI() {
         return new OpenAPI()
+                .addServersItem(new Server().url("/"))
                 .components(new Components());
     }
 
