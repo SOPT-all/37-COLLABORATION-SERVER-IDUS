@@ -37,7 +37,7 @@ public class ProductService {
 
     private final ProductLikeRepository productLikeRepository;
 
-    public ProductResponse getProductDetail(Long productId){
+    public ProductResponse getProductDetail(Long productId, Long userId){
         Product product = findById(productId);
 
         List<ProductImage> productImages = productImageRepository.findAllByProductId(productId);
@@ -49,7 +49,9 @@ public class ProductService {
                 .average()
                 .orElse(0.0);
 
-        return ProductResponse.from(product, productImages, averageScore);
+        boolean isLiked = productLikeRepository.existsByProductIdAndUserId(productId, userId);
+
+        return ProductResponse.from(product, productImages, averageScore, isLiked);
     }
 
     private Product findById(Long productId){

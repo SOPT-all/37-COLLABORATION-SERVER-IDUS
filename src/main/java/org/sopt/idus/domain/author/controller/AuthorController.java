@@ -20,8 +20,8 @@ public class AuthorController {
     @CustomExceptionDescription(SwaggerResponseDescription.AUTHOR_DETAIL)
     @Operation(summary = "작가 정보 조회", description = "작가의 정보를 조회합니다.")
     @GetMapping("{authorId}")
-    public BaseResponse<AuthorResponse> getAuthorDetail(@PathVariable Long authorId) {
-        return BaseResponse.ok(authorService.getAuthorDetail(authorId), "작가 조회 성공");
+    public BaseResponse<AuthorResponse> getAuthorDetail(@PathVariable Long authorId, @RequestParam Long userId) {
+        return BaseResponse.ok(authorService.getAuthorDetail(authorId, userId), "작가 조회 성공");
     }
 
     @CustomExceptionDescription(SwaggerResponseDescription.CREATE_AUTHOR_LIKE)
