@@ -7,6 +7,7 @@ import org.sopt.idus.domain.product.entity.Product;
 import org.sopt.idus.domain.product.repository.ProductRepository;
 import org.sopt.idus.domain.productimage.entity.ProductImage;
 import org.sopt.idus.domain.productimage.repository.ProductImageRepository;
+import org.sopt.idus.domain.productlike.dto.response.ProductLikeResponse;
 import org.sopt.idus.domain.productlike.entity.ProductLike;
 import org.sopt.idus.domain.productlike.repository.ProductLikeRepository;
 import org.sopt.idus.domain.review.dto.response.ReviewListResponse;
@@ -59,16 +60,18 @@ public class ProductService {
     }
 
     @Transactional
-    public void createProductLike(Long productId, Long userId) {
+    public ProductLikeResponse createProductLike(Long productId, Long userId) {
         Product product = findById(productId);
         User user = userService.findById(userId);
 
-        if (deleteLikeIfPresent(productId, userId, product)) return;
+        if (deleteLikeIfPresent(productId, userId, product)) return ProductLikeResponse.of(product);
 
         ProductLike productLike = ProductLike.create(product, user);
         productLikeRepository.save(productLike);
 
         productRepository.increaseLikeCount(product);
+
+        return ProductLikeResponse.of(product);
 
     }
 

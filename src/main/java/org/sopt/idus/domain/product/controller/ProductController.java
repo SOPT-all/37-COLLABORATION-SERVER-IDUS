@@ -4,7 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.sopt.idus.domain.product.dto.response.ProductResponse;
 import org.sopt.idus.domain.product.service.ProductService;
-import org.sopt.idus.domain.productlike.dto.ProductLikeRequest;
+import org.sopt.idus.domain.productlike.dto.request.ProductLikeRequest;
+import org.sopt.idus.domain.productlike.dto.response.ProductLikeResponse;
 import org.sopt.idus.domain.review.dto.response.ReviewListResponse;
 import org.sopt.idus.global.annotation.CustomExceptionDescription;
 import org.sopt.idus.global.dto.response.BaseResponse;
@@ -29,9 +30,9 @@ public class ProductController {
     @CustomExceptionDescription(CREATE_PRODUCT_LIKE)
     @Operation(summary = "작품 좋아요 생성", description = "작품에 좋아요를 생성합니다.")
     @PostMapping("{productId}/likes")
-    public BaseResponse<Void> likeProduct(@PathVariable Long productId, @RequestBody ProductLikeRequest request){
-        productService.createProductLike(productId, request.userId());
-        return BaseResponse.ok("작품 좋아요 생성 성공");
+    public BaseResponse<ProductLikeResponse> likeProduct(@PathVariable Long productId, @RequestBody ProductLikeRequest request){
+
+        return BaseResponse.ok(productService.createProductLike(productId, request.userId()),"작품 좋아요 생성 성공");
     }
 
     @CustomExceptionDescription(GET_REVIEWS)

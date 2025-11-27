@@ -4,7 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.sopt.idus.domain.author.dto.response.AuthorResponse;
 import org.sopt.idus.domain.author.service.AuthorService;
-import org.sopt.idus.domain.authorlike.dto.AuthorLikeRequest;
+import org.sopt.idus.domain.authorlike.dto.request.AuthorLikeRequest;
+import org.sopt.idus.domain.authorlike.dto.response.AuthorLikeResponse;
 import org.sopt.idus.global.annotation.CustomExceptionDescription;
 import org.sopt.idus.global.config.swagger.SwaggerResponseDescription;
 import org.sopt.idus.global.dto.response.BaseResponse;
@@ -27,8 +28,7 @@ public class AuthorController {
     @CustomExceptionDescription(SwaggerResponseDescription.CREATE_AUTHOR_LIKE)
     @Operation(summary = "작가 좋아요 생성", description = "작가에게 좋아요를 생성합니다.")
     @PostMapping("{authorId}/likes")
-    public BaseResponse<Void> createAuthorLike(@PathVariable Long authorId, @RequestBody AuthorLikeRequest req) {
-        authorService.createAuthorLike(authorId, req.userId());
-        return BaseResponse.ok("작가 좋아요 생성 성공");
+    public BaseResponse<AuthorLikeResponse> createAuthorLike(@PathVariable Long authorId, @RequestBody AuthorLikeRequest req) {
+        return BaseResponse.ok(authorService.createAuthorLike(authorId, req.userId()),"작가 좋아요 생성 성공");
     }
 }

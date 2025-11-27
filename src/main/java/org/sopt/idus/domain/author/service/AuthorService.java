@@ -5,6 +5,7 @@ import org.sopt.idus.domain.author.dto.response.AuthorResponse;
 import org.sopt.idus.domain.author.entity.Author;
 import org.sopt.idus.domain.author.errorcode.AuthorErrorCode;
 import org.sopt.idus.domain.author.repository.AuthorRepository;
+import org.sopt.idus.domain.authorlike.dto.response.AuthorLikeResponse;
 import org.sopt.idus.domain.authorlike.entity.AuthorLike;
 import org.sopt.idus.domain.authorlike.repository.AuthorLikeRepository;
 import org.sopt.idus.domain.user.entity.User;
@@ -31,14 +32,16 @@ public class AuthorService {
     }
 
     @Transactional
-    public void createAuthorLike(Long authorId, Long userId) {
+    public AuthorLikeResponse createAuthorLike(Long authorId, Long userId) {
         Author author = findById(authorId);
         User user = userService.findById(userId);
 
-        if(deleteLikeIfPresent(authorId, userId, author)) return;
+        if(deleteLikeIfPresent(authorId, userId, author)) return AuthorLikeResponse.of(author);
         AuthorLike authorLike = AuthorLike.create(author, user);
         authorLikeRepository.save(authorLike);
         authorRepository.increaseLikeCount(author);
+
+        return AuthorLikeResponse.of(author);
     }
 
     private boolean deleteLikeIfPresent(Long authorId, Long userId, Author author) {
